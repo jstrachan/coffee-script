@@ -78,6 +78,12 @@ exports.Base = class Base
   makeReturn: ->
     new Return this
 
+  # Sets the static type annotation on this node to the given type expression
+  # This lets us annotate variables and expressions as having an optional static type
+  typeAnnotate: (typeExp) ->
+    @typeAnnotation = typeExp
+    this
+
   # Does this node, or any of its children, contain a node of a certain kind?
   # Recursively traverses down the *children* of the nodes, yielding to a block
   # and returning true when the block finds a match. `contains` does not cross

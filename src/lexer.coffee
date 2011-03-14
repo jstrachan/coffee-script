@@ -324,6 +324,7 @@ exports.Lexer = class Lexer
     else if value in COMPOUND_ASSIGN then tag = 'COMPOUND_ASSIGN'
     else if value in UNARY           then tag = 'UNARY'
     else if value in SHIFT           then tag = 'SHIFT'
+    else if value in TYPE_ANNOTATE   then tag = 'TYPE_ANNOTATE'
     else if value in LOGIC or value is '?' and prev?.spaced then tag = 'LOGIC'
     else if prev and not prev.spaced
       if value is '(' and prev[0] in CALLABLE
@@ -630,6 +631,9 @@ COMPARE = ['==', '!=', '<', '>', '<=', '>=']
 
 # Mathematical tokens.
 MATH    = ['*', '/', '%']
+
+# Used to supply an optional static type annotation
+TYPE_ANNOTATE  = ['<:', '@@', 'TYPE']
 
 # Relational tokens that are negatable with `not` prefix.
 RELATION = ['IN', 'OF', 'INSTANCEOF']
