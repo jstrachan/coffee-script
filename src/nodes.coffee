@@ -78,10 +78,14 @@ exports.Base = class Base
   makeReturn: ->
     new Return this
 
+  typeAnnotation: null
+  
   # Sets the static type annotation on this node to the given type expression
   # This lets us annotate variables and expressions as having an optional static type
   typeAnnotate: (typeExp) ->
-    @typeAnnotation = typeExp
+    # TODO
+    console.log "Setting type annotation on #{this} to #{typeExp}"
+    typeAnnotation = typeExp
     this
 
   # Does this node, or any of its children, contain a node of a certain kind?
