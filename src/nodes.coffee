@@ -939,7 +939,8 @@ exports.Assign = class Assign extends Base
         o.scope.add name, 'var'
       else
         o.scope.find name
-      o.scope.type(name).typeAnnotation = @variable.typeAnnotation
+      if o.scope.type(name)?
+        o.scope.type(name).typeAnnotation = @variable.typeAnnotation
 
     val = name + " #{ @context or '=' } " + val
     if o.level <= LEVEL_LIST then val else "(#{val})"
