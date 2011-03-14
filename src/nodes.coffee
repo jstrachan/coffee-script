@@ -77,17 +77,16 @@ exports.Base = class Base
   # many statement nodes (e.g. If, For)...
   makeReturn: ->
     new Return this
-
-  typeAnnotation: null
   
   # Sets the static type annotation on this node to the given type expression
   # This lets us annotate variables and expressions as having an optional static type
   typeAnnotate: (typeExp) ->
     # TODO
-    console.log "Setting type annotation on #{this} to #{typeExp}"
-    typeAnnotation = typeExp
+    this.typeAnnotation = typeExp
     this
 
+  typeAnnotation: -> this.typeAnnotation
+  
   # Does this node, or any of its children, contain a node of a certain kind?
   # Recursively traverses down the *children* of the nodes, yielding to a block
   # and returning true when the block finds a match. `contains` does not cross
@@ -261,7 +260,17 @@ exports.Block = class Block extends Base
     {scope} = o
     if scope.expressions is this
       if not o.globals and o.scope.hasDeclarations()
-        code += "#{@tab}var #{ scope.declaredVariables().join(', ') };\n"
+        noTypeVars = []
+        for name in o.scope.declaredVariables()
+          t = o.scope.type(name)
+          if( t.typeAnnotation? )
+            code += "#{@tab}/** @type {#{t.typeAnnotation}} */\n"
+            code += "#{@tab}var #{name};\n"
+          else
+            noTypeVars.push name
+            
+        if !!noTypeVars.length
+          code += "#{@tab}var #{noTypeVars.join(', ')};\n"
       if scope.hasAssignments
         code += "#{@tab}var #{ multident scope.assignedVariables().join(', '), @tab };\n"
     code + post
@@ -930,6 +939,8 @@ exports.Assign = class Assign extends Base
         o.scope.add name, 'var'
       else
         o.scope.find name
+      o.scope.type(name).typeAnnotation = @variable.typeAnnotation
+
     val = name + " #{ @context or '=' } " + val
     if o.level <= LEVEL_LIST then val else "(#{val})"
 

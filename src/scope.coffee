@@ -22,9 +22,16 @@ exports.Scope = class Scope
     @positions = {}
     Scope.root = this unless @parent
 
+  normalize: (value) ->
+    if( typeof(value) == 'string' )
+      { kind:value }
+    else
+      value
+    
   # Adds a new variable or overrides an existing one.
   add: (name, type, immediate) ->
     return @parent.add name, type, immediate if @shared and not immediate
+    type = @normalize(type)
     if typeof (pos = @positions[name]) is 'number'
       @variables[pos].type = type
     else
@@ -84,7 +91,7 @@ exports.Scope = class Scope
   declaredVariables: ->
     realVars = []
     tempVars = []
-    for v in @variables when v.type is 'var'
+    for v in @variables when v.type.kind is 'var'
       (if v.name.charAt(0) is '_' then tempVars else realVars).push v.name
     realVars.sort().concat tempVars.sort()
 
