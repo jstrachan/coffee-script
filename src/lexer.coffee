@@ -558,6 +558,7 @@ OPERATOR   = /// ^ (
    | >>>=?             # zero-fill right shift
    | ([-+:])\1         # doubles
    | ([&|<>])\2=?      # logic / shift
+   | <:                # type accessor
    | \?\.              # soak access
    | \.{2,3}           # range or splat
 ) ///
@@ -633,7 +634,7 @@ COMPARE = ['==', '!=', '<', '>', '<=', '>=']
 MATH    = ['*', '/', '%']
 
 # Used to supply an optional static type annotation
-TYPE_ANNOTATE  = ['<:', '@@', 'TYPE']
+TYPE_ANNOTATE  = ['<:']
 
 # Relational tokens that are negatable with `not` prefix.
 RELATION = ['IN', 'OF', 'INSTANCEOF']

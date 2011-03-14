@@ -217,7 +217,7 @@ grammar =
   # TODO - TYPE_ANNOTATE should really call: (new Value $1).typeAnnotate($2)
   SimpleAssignable: [
     o 'Identifier',                             -> new Value $1
-    o 'Identifier TYPE_ANNOTATE Identifier',    -> new Value $1, [$2]
+    o 'Identifier TYPE_ANNOTATE Identifier',    -> (new Value $1).typeAnnotate($2)
     o 'Value Accessor',                         -> $1.push $2
     o 'Invocation Accessor',                    -> new Value $1, [$2]
     o 'ThisProperty'
