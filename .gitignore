@@ -6,3 +6,7 @@ test/fixtures/underscore
 test/*.js
 examples/beautiful_code/parse.coffee
 *.gem
+*.iml
+*.ipr
+target
+.idea
