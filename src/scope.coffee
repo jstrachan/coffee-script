@@ -20,6 +20,7 @@ exports.Scope = class Scope
   constructor:(@parent, @expressions, @method) ->
     @variables = [{name: 'arguments', type: 'arguments'}]
     @positions = {}
+    @typeAnnotations = {}
     Scope.root = this unless @parent
 
   normalize: (value) ->
@@ -49,6 +50,14 @@ exports.Scope = class Scope
   parameter: (name) ->
     return if @shared and @parent.check name, yes
     @add name, 'param'
+
+  # registers the given type annotation for the given name
+  typeAnnotate: (name, typeAnn) ->
+    if typeAnn
+      @typeAnnotations[name] = typeAnn
+
+  typeAnnotation: (name) ->
+    @typeAnnotations[name]
 
   # Just check to see if a variable has already been declared, without reserving,
   # walks up to the root scope.

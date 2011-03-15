@@ -1157,9 +1157,6 @@ break;
 case 31:this.$ = new yy.Literal($$[$0]);
 break;
 case 32:this.$ = (function () {
-        /** @type {function () {
-      return this.typeAnnotation;
-    }} */
         var val;
         val = new yy.Literal($$[$0]);
         if ($$[$0] === 'undefined') {
@@ -1764,6 +1761,7 @@ if (typeof module !== 'undefined' && require.main === module) {
         }
       ];
       this.positions = {};
+      this.typeAnnotations = {};
       if (!this.parent) {
         Scope.root = this;
       }
@@ -1804,6 +1802,14 @@ if (typeof module !== 'undefined' && require.main === module) {
         return;
       }
       return this.add(name, 'param');
+    };
+    Scope.prototype.typeAnnotate = function(name, typeAnn) {
+      if (typeAnn) {
+        return this.typeAnnotations[name] = typeAnn;
+      }
+    };
+    Scope.prototype.typeAnnotation = function(name) {
+      return this.typeAnnotations[name];
     };
     Scope.prototype.check = function(name, immediate) {
       var found, _ref;
@@ -2167,7 +2173,7 @@ if (typeof module !== 'undefined' && require.main === module) {
       }
     };
     Block.prototype.compileWithDeclarations = function(o) {
-      var code, exp, i, name, noTypeVars, post, rest, scope, t, tn, _i, _len, _len2, _ref, _ref2, _ref3;
+      var code, exp, i, name, noTypeVars, post, rest, scope, t, tn, _i, _len, _len2, _ref, _ref2;
       code = post = '';
       _ref = this.expressions;
       for (i = 0, _len = _ref.length; i < _len; i++) {
@@ -2193,8 +2199,8 @@ if (typeof module !== 'undefined' && require.main === module) {
           _ref2 = o.scope.declaredVariables();
           for (_i = 0, _len2 = _ref2.length; _i < _len2; _i++) {
             name = _ref2[_i];
-            t = o.scope.type(name);
-            tn = (_ref3 = t.typeAnnotation) != null ? _ref3.value : void 0;
+            t = o.scope.typeAnnotation(name);
+            tn = t != null ? t.value : void 0;
             if (tn != null) {
               code += "" + this.tab + "/** @type {" + tn + "} */\n";
               code += "" + this.tab + "var " + name + ";\n";
@@ -3024,7 +3030,7 @@ if (typeof module !== 'undefined' && require.main === module) {
       return unfoldSoak(o, this, 'variable');
     };
     Assign.prototype.compileNode = function(o) {
-      var isValue, match, name, val, _ref;
+      var isValue, match, name, ta, val, _ref;
       if (isValue = this.variable instanceof Value) {
         if (this.variable.isArray() || this.variable.isObject()) {
           return this.compilePatternMatch(o);
@@ -3056,8 +3062,9 @@ if (typeof module !== 'undefined' && require.main === module) {
         } else {
           o.scope.find(name);
         }
-        if (o.scope.type(name) != null) {
-          o.scope.type(name).typeAnnotation = this.variable.typeAnnotation;
+        ta = this.variable.typeAnnotation;
+        if (ta) {
+          o.scope.typeAnnotate(name);
         }
       }
       val = name + (" " + (this.context || '=') + " ") + val;

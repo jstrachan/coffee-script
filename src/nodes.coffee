@@ -81,7 +81,6 @@ exports.Base = class Base
   # Sets the static type annotation on this node to the given type expression
   # This lets us annotate variables and expressions as having an optional static type
   typeAnnotate: (typeExp) ->
-    # TODO
     @typeAnnotation = typeExp
     this
 
@@ -260,8 +259,8 @@ exports.Block = class Block extends Base
       if not o.globals and o.scope.hasDeclarations()
         noTypeVars = []
         for name in o.scope.declaredVariables()
-          t = o.scope.type(name)
-          tn =  t.typeAnnotation?.value
+          t = o.scope.typeAnnotation(name)
+          tn =  t?.value
           if tn?
             code += "#{@tab}/** @type {#{tn}} */\n"
             code += "#{@tab}var #{name};\n"
@@ -938,8 +937,9 @@ exports.Assign = class Assign extends Base
         o.scope.add name, 'var'
       else
         o.scope.find name
-      if o.scope.type(name)?
-        o.scope.type(name).typeAnnotation = @variable.typeAnnotation
+      ta = @variable.typeAnnotation
+      if ta
+        o.scope.typeAnnotate(name, ta)
 
     val = name + " #{ @context or '=' } " + val
     if o.level <= LEVEL_LIST then val else "(#{val})"

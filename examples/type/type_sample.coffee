@@ -1,2 +1,3 @@
-foo <: String = "Hey"
-alert "Got foo: #{foo}"
+foo <: Bar = "Hey"
+bar <: String = "There"
+alert "Got foo: #{foo} #{bar}"

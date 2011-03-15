@@ -79,6 +79,61 @@ task 'build:parser', 'rebuild the Jison parser (run build first)', ->
   fs.writeFile 'lib/parser.js', parser.generate()
 
 
+task 'build:js', 'generate JS code for all the src and tests', ->
+  # TODO is there a nicer JS way thats cross platform?
+  exec 'mkdir -p target/src'
+  exec 'mkdir -p target/test'
+
+  exec './bin/coffee -o target/src src'
+  exec './bin/coffee -o target/test test'
+
+task 'clean', 'cleans up the generated JS code', ->
+  console.log "deleting the target dir"
+  exec 'rm -rf target'
+
+task 'build:check', 'checks all the static types used in the generated JS code', ->
+  # TODO is there a nicer JS way thats cross platform?
+  exec 'mkdir -p target/checked/src'
+  exec 'mkdir -p target/checked/test'
+
+  invoke 'build:js'
+
+  # Run every test in the `test` folder, recording failures.
+  console.log "checking types"
+  
+  # TODO sometimes the files is undefined
+  
+  useDir = false
+  checkdir = (dir) ->
+    console.log "checking dir #{dir}"
+    outDir = "target/#{dir}"
+    errors = ""
+    fs.readdir outDir, (err, files) ->
+      if files
+        if useDir
+          fileList = files.map((f) -> "#{dir}/#{f}.js").join ' '
+          cmd = "java -jar google-closure/compiler.jar --jscomp_warning checkTypes --js_output_file target/checked/#{dir}  --js #{fileList}"
+          console.log cmd
+          errors += "\n" + exec cmd 
+        else
+          files.forEach (file) ->
+            return unless file.match(/\.js/i)
+            filename = path.join 'target/' + dir, file
+            cmd = "java -jar google-closure/compiler.jar --jscomp_warning checkTypes --js #{outDir}/#{file} --js_output_file target/checked/#{dir}/#{file}"
+            exec cmd, (err, stdout, stderr) ->
+              if err 
+                console.log red + stderr.trim() 
+              else 
+                msg = stdout.trim()
+                if msg.length > 0
+                  console.log green + msg
+      else
+        console.log "Warning directory #{outDir} does not exist yet"
+        
+    console.log "Completed: #{errors}"
+  checkdir d for d in ['src', 'test']
+  
+
 task 'build:ultraviolet', 'build and install the Ultraviolet syntax highlighter', ->
   exec 'plist2syntax ../coffee-script-tmbundle/Syntaxes/CoffeeScript.tmLanguage', (err) ->
     throw err if err
