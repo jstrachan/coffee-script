@@ -4,5 +4,9 @@
 # TODO: check that type annotations parse
 
 test "type annotations do not break statements", ->
-  foo <: String = "Hey"
+  x <: String = "Blah"
+  foo <: Bar = "Hey"
   eq foo, "Hey"
+
+  x = "Bah"
+  eq x, "Bah"

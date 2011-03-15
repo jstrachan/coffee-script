@@ -82,11 +82,9 @@ exports.Base = class Base
   # This lets us annotate variables and expressions as having an optional static type
   typeAnnotate: (typeExp) ->
     # TODO
-    this.typeAnnotation = typeExp
+    @typeAnnotation = typeExp
     this
 
-  typeAnnotation: -> this.typeAnnotation
-  
   # Does this node, or any of its children, contain a node of a certain kind?
   # Recursively traverses down the *children* of the nodes, yielding to a block
   # and returning true when the block finds a match. `contains` does not cross
@@ -263,8 +261,9 @@ exports.Block = class Block extends Base
         noTypeVars = []
         for name in o.scope.declaredVariables()
           t = o.scope.type(name)
-          if( t.typeAnnotation? )
-            code += "#{@tab}/** @type {#{t.typeAnnotation}} */\n"
+          tn =  t.typeAnnotation?.value
+          if tn?
+            code += "#{@tab}/** @type {#{tn}} */\n"
             code += "#{@tab}var #{name};\n"
           else
             noTypeVars.push name
