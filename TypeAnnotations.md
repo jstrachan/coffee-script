@@ -46,8 +46,10 @@ The type annotations are completely optional; they provide a consise syntax that
 What if I don't want to use them
 --------------------------------
 
-Thats totally fine! In many ways lots of JavaScript pages are quite simple; doing a bit of Ajax + DOM manipulation with jQuery and whatnot; the help type checking brings (dynamic or static) doesn't help hugely. We hope to keep UberScript syntax compatible with CoffeeScript (but just with type annotations added) so you should be able to mix and match CoffeeScript, UberScript, JavaScript and even Java (via GWT) on a project.
+Thats totally fine! In many ways lots of JavaScript pages are quite simple; doing a bit of Ajax + DOM manipulation with jQuery and whatnot; the help type checking (dynamic or static) brings to small & simple scripts doesn't help hugely. 
 
 However increasingly folks are writing bigger and bigger codebases in CoffeeScript; to run both on the client and server side; so type annotations can help you scale your code across different teams & help catch refactoring bugs earlier. Though YMMV so relax, don't worry - just enjoy CoffeeScript / UberScript and see if/when you wanna annotate some code with type annotations.
+
+We hope to keep UberScript syntax 100% compatible with regular CoffeeScript (but just with the optional type annotations added) so you should be able to mix and match CoffeeScript, UberScript, JavaScript and even Java (via GWT) on a project.
 
 
