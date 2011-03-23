@@ -1,7 +1,7 @@
 Background
 ==========
 
-Increasingly as developers we're spending more of our development effort on the client side; whether iPhone/iPad/iPod, Android, mobile phones, tablets & set top boxes, web applications and native desktop applications. In many ways the server side is often becoming more simple (e.g. server side might be SimpleDb/BigTable/CouchDb et al). So far the clear leader in a universal language & platform for rich UIs is HTML + CSS + JavaScript. (Ducks flamewars).
+Increasingly as developers we're spending more of our development effort on the client side; whether iPhone/iPad/iPod, Android, mobile phones, tablets & set top boxes, web applications and native desktop applications. In many ways the server side is often becoming more simple (e.g. server side might be SimpleDb/BigTable/CouchDb et al). So far the clear leader in a universal language & platform for rich UIs is HTML + CSS + JavaScript particularly with frameworks like [Appcelerator](http://www.appcelerator.com/) and [PhoneGap](http://www.phonegap.com/). (Ducks flamewars - if you only create iOS apps then maybe Objective-C is right for you; but wouldn't you rather a nicer, more reusable language? ;).
 
 As many of us are aware JavaScript [has some issues](http://oreilly.com/catalog/9780596517748) such as == not working, lexical scoping being broken etc. However [CoffeeScript](http://jashkenas.github.com/coffee-script/) creates a simple elegant ruby/python style language syntax that compiles direct to native JS. So no weird Java wrappers or very slow compilation steps (we're aiming at UI stuff which you want very rapid save & [auto-browser reload]()) like GWT etc. You hack JavaScript just in an elegant syntax which hides the bad parts.
 
