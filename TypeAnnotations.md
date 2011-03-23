@@ -11,7 +11,7 @@ UberScript
  
 This fork of the [CoffeeScript language](http://jashkenas.github.com/coffee-script/) adds optional type annotations.  Ideally we'd like these fairly minor changes to get merged back into  [CoffeeScript](http://jashkenas.github.com/coffee-script/), though if thats not an option we need another name for this fork. Current working name is UberScript (as it supports various points on the religious dynamic-static type checking debate ;).
 
-We've added type annotations to every point of the language AST; we've only added them so far to the grammar for assignments - but they should be most places in the language soon such as function arguments & object properties etc.
+We've added optional type annotations to every point of the language AST; we've only added them so far to the grammar for assignments - but they should be most places in the language soon such as function arguments & object properties etc.
 
 UberScript is a superset of CoffeeScript; in UberScript you can now do stuff like this:
 
