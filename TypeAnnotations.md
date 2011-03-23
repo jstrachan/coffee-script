@@ -13,7 +13,7 @@ This fork of the [CoffeeScript language](http://jashkenas.github.com/coffee-scri
 
 We've added type annotations to every point of the language AST; we've only added them so far to the grammar for assignments - but they should be most places in the language soon such as function arguments & object properties etc.
 
-So in UberScript you can now do stuff like this:
+UberScript is a superset of CoffeeScript; in UberScript you can now do stuff like this:
 
     foo <: String = "hey"
     bar <: Array<People> = something()
@@ -33,7 +33,7 @@ e.g. generated JS...
 So why the type annotations?
 ----------------------------
 
-The type annotations are optional and concise syntax; they can be used to surf various parts of the dynamic-static type continuum based on your needs and tastes...
+The type annotations are completely optional; they provide a consise syntax that can be used to surf various parts of the dynamic-static type continuum based on your needs and tastes...
 
 * do nothing; stick to really fast to load & parse JS code
 * purely for documentation to help folks grok APIs and the actual expected types
