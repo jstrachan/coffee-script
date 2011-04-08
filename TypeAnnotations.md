@@ -43,8 +43,8 @@ The type annotations are completely optional; they provide a consise syntax that
 * potentially we could generate fast static bytecode on a JVM if you want to reuse UberScript classes on the server side along with JVM libraries and frameworks; possibly using [Rhino](http://www.mozilla.org/rhino/) or [Mirah](http://www.mirah.org/)
 
 
-What if I don't want to use them
---------------------------------
+What if I don't want to use them?
+---------------------------------
 
 Thats totally fine! In many ways lots of JavaScript pages are quite simple; doing a bit of Ajax + DOM manipulation with jQuery and whatnot; the help type checking (dynamic or static) brings to small & simple scripts doesn't help hugely. 
 

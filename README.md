@@ -1,4 +1,5 @@
-=
+**Note** this fork of CoffeeScript adds [Type Annotations](TypeAnnotations.md)
+
             {
          }   }   {
         {   {  }  }
