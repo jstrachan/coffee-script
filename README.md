@@ -21,28 +21,31 @@
                                                         |_|
 
 
-  CoffeeScript is a little language that compiles into JavaScript.
+CoffeeScript is a little language that compiles into JavaScript.
 
-  Install Node.js, and then the CoffeeScript compiler:
-  sudo bin/cake install
+Install Node.js, and then the CoffeeScript compiler:
 
-  Or, if you have the Node Package Manager installed:
-  npm install coffee-script
+    sudo bin/cake install
 
-  Compile a script:
-  coffee /path/to/script.coffee
+Or, if you have the Node Package Manager installed:
 
-  For documentation, usage, and examples, see:
-  http://coffeescript.org/
+    npm install coffee-script
 
-  To suggest a feature, report a bug, or general discussion:
-  http://github.com/jashkenas/coffee-script/issues/
+Compile a script:
 
-  If you'd like to chat, drop by #coffeescript on Freenode IRC,
-  or on webchat.freenode.net.
+    coffee /path/to/script.coffee
 
-  The source repository:
-  git://github.com/jashkenas/coffee-script.git
+For documentation, usage, and examples, see: [http://coffeescript.org/](http://coffeescript.org/)
 
-  All contributors are listed here:
-  http://github.com/jashkenas/coffee-script/contributors
+To suggest a feature, report a bug, or general discussion:
+[http://github.com/jashkenas/coffee-script/issues/](http://github.com/jashkenas/coffee-script/issues/
+)
+
+If you'd like to chat, drop by #coffeescript on Freenode IRC,
+or on webchat.freenode.net.
+
+The source repository:
+**git://github.com/jashkenas/coffee-script.git**
+
+All contributors are listed here:
+[http://github.com/jashkenas/coffee-script/contributors](http://github.com/jashkenas/coffee-script/contributors)
