@@ -1,4 +1,4 @@
-**Note** this fork of CoffeeScript adds [Type Annotations](TypeAnnotations.md)
+**Note** this fork of [CoffeeScript](http://coffeescript.org/) adds [Type Annotations for additional type checking](https://github.com/jstrachan/coffee-script/blob/master/TypeAnnotations.md)
 
             {
          }   }   {
