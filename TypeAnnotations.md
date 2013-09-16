@@ -1,3 +1,16 @@
+UPDATE
+======
+
+My hope when I started hacking UberScript was to eventually get the changes merged into CoffeeScript & slowly persuade CoffeeScript folks that a bit of type inferencing and the odd optional type annotation isn't that big a deal - and can be very useful; though its looking like thats never gonna happen.
+
+Since I started UberScript; [TypeScript](http://www.typescriptlang.org/) has come along; with type inference, type checking, optional type annotations, generics, source maps and various other features of ES6 all in a nice compiler along with great tooling in Intellij / WebStorm.
+
+While I refer the high level syntax of CoffeeScript (the use of whitespace indentation instead of "{" and the more ruby-ish general syntax and lack of semi-colons) the type inference and optional static types of TypeScript and Intellij tooling for me are a pretty awesome combination of writing scalable JavaScript; the use of "{" and ";" is a small price to pay for the lovely benefits of TypeScript!
+
+So if you're writing JavaScript (and don't want a language leaky abstraction like GWT/Dart et al) and want some type inferencing/type checking/optional static types, I'd highly recommend you check out [TypeScript](http://www.typescriptlang.org/)!
+
+If you want to see a TypeScript / AngularJS project I'm working on a lot these days, please do check out [hawtio](http://hawt.io/)
+
 Background
 ==========
 
